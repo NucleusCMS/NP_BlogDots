@@ -10,7 +10,7 @@ class NP_BlogDots extends NucleusPlugin {
   function getURL() {		return 'http://tankyard.xrea.jp/'; }
   function getVersion() {	return '0.1'; }
   function getDescription() { 
-    return 'BlogDots Graphic Generate. use GD.&lt;%BlogDots(CL_blogid,CL_catid,BT_blogid,BT_catid,height,width,padding,bordercolor,basecolor,linecolor,dotcolor,show_text,textcolor,font_id)%&gt; ';
+    return 'BlogDots Graphic Generate. use GD.<br />&lt;%BlogDots(CL_blogid,CL_catid,BT_blogid,BT_catid,height,width,padding,bordercolor,basecolor,linecolor,dotcolor,show_text,textcolor,font_id)%&gt; ';
   }
 
 	function supportsFeature($what) {
