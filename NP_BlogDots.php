@@ -13,14 +13,7 @@ class NP_BlogDots extends NucleusPlugin {
     return 'BlogDots Graphic Generate. use GD.<br />&lt;%BlogDots(CL_blogid,CL_catid,BT_blogid,BT_catid,height,width,padding,bordercolor,basecolor,linecolor,dotcolor,show_text,textcolor,font_id)%&gt; ';
   }
 
-	function supportsFeature($what) {
-		switch($what){
-			case 'SqlTablePrefix':
-				return 1;
-			default:
-				return 0;
-		}
-	}
+  function supportsFeature($feature) { return in_array ($feature, array ('SqlTablePrefix', 'SqlApi')); }
   /**
   * On plugin install, three options are created
    */
@@ -191,7 +184,7 @@ class NP_BlogDots extends NucleusPlugin {
       $query2 .= ' and icat='.$bcatid ;
 
     $res = sql_query($category_query);
-    if($row =mysql_fetch_row($res)) $categorycount = $row[0];
+    if($row =sql_fetch_row($res)) $categorycount = $row[0];
 
 
     #オリジナル互換
@@ -226,7 +219,7 @@ class NP_BlogDots extends NucleusPlugin {
     $line_len=$height/$categorycount ;
 
     $res = sql_query($query2);
-    while ($current = mysql_fetch_object($res)) {
+    while ($current = sql_fetch_object($res)) {
       $hour = $current->hour ;
       $minute = $current->minute ;
       $cat    = $current->icat;
@@ -237,7 +230,7 @@ class NP_BlogDots extends NucleusPlugin {
       ImageLine($img,$line_x,$line_y1,$line_x,$line_y2,$lncol);
     }
     $res = sql_query($query);
-    while ($current = mysql_fetch_object($res)) {
+    while ($current = sql_fetch_object($res)) {
       $hour = $current->hour ;
       $minute = $current->minute ;
       $cat    = $current->icat;
@@ -248,7 +241,7 @@ class NP_BlogDots extends NucleusPlugin {
       ImageLine($img,$line_x,$dot_y1,$line_x,$dot_y2,$dtcol);
     }
 		
-    mysql_free_result($res);
+    sql_free_result($res);
 
     #text出力
     if($show_text == 'on'){
@@ -311,4 +304,3 @@ class NP_BlogDots extends NucleusPlugin {
     return $ret;
   }
 }
-?>
